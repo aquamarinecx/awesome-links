@@ -2,6 +2,11 @@
 ### Do not make changes to this file directly
 
 
+type Edge {
+  cursor: String
+  node: Link
+}
+
 type Link {
   category: String
   description: String
@@ -12,8 +17,13 @@ type Link {
   users: [User]
 }
 
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean
+}
+
 type Query {
-  links: [Link]!
+  links(after: String, first: Int): response
 }
 
 enum Role {
@@ -28,4 +38,9 @@ type User {
   image: String
   name: String
   role: Role
+}
+
+type response {
+  edges: [Edge]
+  pageInfo: PageInfo
 }
